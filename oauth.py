@@ -23,8 +23,13 @@ def oauth_req(url, http_method="GET", post_body='',
     return content
  
 home_timeline = oauth_req(
-  'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=twitterapi&count=1'
+  'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=twitterapi&count=10'
 )
-print home_timeline
+home_timeline = json.loads(home_timeline)
+arraystore = []
+for a in home_timeline :
+    print a["text"]
+    arraystore.append(a["text"])
+
 with open('data.txt', 'w') as outfile:
-    json.dump(home_timeline, outfile)
+    json.dump(arraystore, outfile)
